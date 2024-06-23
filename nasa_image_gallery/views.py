@@ -28,6 +28,14 @@ def search(request):
     images, favourite_list = getAllImagesAndFavouriteList(request)
     search_msg = request.POST.get('query', '')
 
+    if not search_msg.strip():
+        # Si no se ingresó ningún texto de búsqueda, podrías manejarlo aquí (por ejemplo, refrescar la página)
+        return render(request, 'your_template.html', {'images': images, 'favourites': favourite_list})
+    else:
+        # Filtrar imágenes que contienen el texto de búsqueda en el título o la descripción
+        filtered_images = [image for image in images if search_msg.lower() in image['title'].lower() or search_msg.lower() in image['description'].lower()]
+
+        return render(request, 'your_template.html', {'images': filtered_images, 'favourites': favourite_list})
     # si el usuario no ingresó texto alguno, debe refrescar la página; caso contrario, debe filtrar aquellas imágenes que posean el texto de búsqueda.
     pass
 
