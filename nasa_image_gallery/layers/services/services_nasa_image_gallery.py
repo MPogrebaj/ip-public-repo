@@ -4,6 +4,7 @@ from ..transport import transport
 from ..dao import repositories
 from ..generic import mapper
 from django.contrib.auth import get_user
+from nasa_image_gallery.layers.generic.mapper import fromRequestIntoNASACard
 
 def getAllImages(input=None):
     # obtiene un listado de imágenes desde transport.py y lo guarda en un json_collection.
